@@ -1,22 +1,15 @@
 [Okta's Identity Engine]: https://developer.okta.com/docs/concepts/ie-intro/
 [Okta Auth JS]: https://github.com/okta/okta-auth-js
+[Okta Sign In Widget]: https://github.com/okta/okta-signin-widget
 
-# Embedded Auth with SDKs Sample Application
+# Embedded Sign In Widget Sample Applications
 
 ## Introduction
 
 > :grey_exclamation: The use of this Sample uses an SDK that requires usage of the Okta Identity Engine. This functionality is in general availability but is being gradually rolled out to customers. If you want
 to request to gain access to the Okta Identity Engine, please reach out to your account manager. If you do not have an account manager, please reach out to oie@okta.com for more information.
 
-This Sample Application will show you the best practices for integrating Authentication into your app
-using [Okta's Identity Engine][]. Specifically, this application will cover some basic needed use cases to get you up and running quickly with Okta.
-These Examples are:
-
-1. Sign In
-2. Sign Out
-3. Sign Up
-4. Sign In/Sign Up with Social Identity Providers
-5. Sign In with Multifactor Authentication using Email or Phone
+This Sample Application will show you the best practices for integrating Authentication by embedding the [Okta Sign In Widget][] into your application. The [Okta Sign In Widget][] is powered by [Okta's Identity Engine][] and will adjust your user experience based on policies. Once integrated, you will be able to utilize all the features of Okta's Sign In Widget in your application.
 
 
 ## Installation & Running The App
@@ -49,7 +42,7 @@ CLIENT_SECRET=456xxx
 
 ### Commands
 
-If running from the workspace directory: `yarn workspace @okta/samples.express-embedded-auth-with-sdk start`
+If running from the workspace directory: `yarn workspace @okta/samples.express-embedded-sign-in-widget start`
 
 | Command               | Description                    |
 | --------------------- | ------------------------------ |
@@ -60,13 +53,7 @@ If running from the workspace directory: `yarn workspace @okta/samples.express-e
 
 This sample app follows classic ExpressJS routing structure and uses [mustache-express](https://www.npmjs.com/package/mustache-express) as the view engine. Below is how the specific scenarios map the routes:
 
-* Sign In Flow -> [routes/login.js](./web-server/routes/login.js)
-
-* Self Service Registration -> [routes/register.js](./web-server/routes/register.js)
-
-* Self Service Password Recovery ->  [routes/recover-password.js](./web-server/routes/recover-password.js)
-
-* Multifactor -> [routes/authenticators.js](./web-server/routes/authenticators.js)
+* Sign In Widget Integration -> [routes/login.js](./web-server/routes/login.js)
 
 * Logout -> [routes/logout.js](./web-server/routes/logout.js)
 
@@ -75,9 +62,3 @@ This sample app follows classic ExpressJS routing structure and uses [mustache-e
 As this sample app is implemented to support multiple users scenario, a custom storage provide will be needed to inject to the [authClient][Okta Auth JS] to proper store the transaction meta and tokens. In this sample, it leverages [express-session](https://www.npmjs.com/package/express-session) to store data based on the transactionId.
 
 See implementation details in [getAuthClient.js](./web-server/utils/getAuthClient.js) and [Auth JS storageProvider](https://github.com/okta/okta-auth-js#storageprovider).
-
-### Centralized transaction (idxStates) handler
-
-The [Okta's Identity Engine][] is a state machine, it responses different states based on the request. To handle the complex response states, a centralized transaction handler pattern is introduced in this sample. It handles the response based on [transaction.status](https://github.com/okta/okta-auth-js/blob/master/docs/idx.md#status), then dispatches the requests to proper routes based on [transaction.nextStep](https://github.com/okta/okta-auth-js/blob/master/docs/idx.md#nextstep).
-
-See implementation details in [handleTransaction.js](./web-server/utils/handleTransaction.js).

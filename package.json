@@ -1,5 +1,5 @@
 {
-  "name": "@okta/samples.express-embedded-auth-with-sdk",
+  "name": "@okta/samples.express-embedded-sign-in-widget",
   "private": true,
   "version": "1.0.0",
   "main": "index.js",
@@ -7,8 +7,8 @@
     "node": ">=14.0.0"
   },
   "scripts": {
-    "start": "node ./web-server/server.js",
-    "dev": "nodemon ./web-server/server.js --watch web-server ../../../build/cjs"
+    "start": "SIW_VERSION=${SIW_VERSION-6.7.0} node ./web-server/server.js",
+    "dev": "SIW_VERSION=${SIW_VERSION-6.7.0} nodemon ./web-server/server.js --watch ../../../build/cjs"
   },
   "dependencies": {
     "express": "^4.17.1",
@@ -17,7 +17,8 @@
     "cors": "^2.8.5",
     "js-yaml": "^4.1.0",
     "dotenv": "^10.0.0",
-    "@okta/okta-auth-js": "*"
+    "@okta/okta-auth-js": "*",
+    "@okta/okta-signin-widget": "^6.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19",

@@ -30,9 +30,9 @@ module.exports = function () {
     webServer: {
       port: APP_PORT,
       oidc: {
-        clientId: CLIENT_ID || '',
-        clientSecret: CLIENT_SECRET || '',
-        issuer: ISSUER || '',
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET,
+        issuer: ISSUER,
         appBaseUrl: APP_BASE_URL,
         scopes: ['openid', 'profile', 'email'],
         redirectUri: REDIRECT_URI,
@@ -40,7 +40,7 @@ module.exports = function () {
         testing: {
           disableHttpsCheck: OKTA_TESTING_DISABLEHTTPSCHECK
         }
-      },
+      }
     }
   };
 };
